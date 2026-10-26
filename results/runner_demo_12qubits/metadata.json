@@ -1,0 +1,9 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "git_commit": null,
+  "git_dirty": true,
+  "created_utc": "2026-10-26T13:10:39.932589+00:00",
+  "config_sha256": "f3ac5c2c470203e9bb96df03bc546367cf96389dbef038c26e923962dcce9757"
+}

@@ -1,0 +1,31 @@
+{
+  "qubits": [
+    12
+  ],
+  "clause_sizes": [
+    3,
+    4
+  ],
+  "densities": {
+    "3": 4.25,
+    "4": 9.75
+  },
+  "depths": [
+    5
+  ],
+  "instance_seeds": [
+    0
+  ],
+  "methods": [
+    "adaptive",
+    "fixed_evt",
+    "exact_greedy",
+    "uniform"
+  ],
+  "repeats": 5,
+  "shots": 100,
+  "warmup": 10,
+  "optimizer_maxiter": 30,
+  "sampling_seed": 2026,
+  "save_histories": true
+}

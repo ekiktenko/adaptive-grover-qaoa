@@ -1,0 +1,104 @@
+{
+  "problem_seed": 3,
+  "k": 4,
+  "repeat": 96,
+  "initial_target": -1.195267859297152,
+  "updates": [
+    {
+      "after_shot": 10,
+      "old_target": -1.195267859297152,
+      "target": 8.0,
+      "reason": "warmup"
+    },
+    {
+      "after_shot": 16,
+      "old_target": 8.0,
+      "target": 7.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 17,
+      "old_target": 7.0,
+      "target": 6.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 18,
+      "old_target": 6.0,
+      "target": 5.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 21,
+      "old_target": 5.0,
+      "target": 4.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 23,
+      "old_target": 4.0,
+      "target": 3.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 32,
+      "old_target": 3.0,
+      "target": 2.0,
+      "reason": "improvement"
+    },
+    {
+      "after_shot": 45,
+      "old_target": 2.0,
+      "target": 0.0,
+      "reason": "improvement"
+    }
+  ],
+  "fits": [
+    {
+      "before_shot": 1,
+      "target": -1.195267859297152,
+      "nfev": 14172
+    },
+    {
+      "before_shot": 11,
+      "target": 8.0,
+      "nfev": 12363
+    },
+    {
+      "before_shot": 17,
+      "target": 7.0,
+      "nfev": 12309
+    },
+    {
+      "before_shot": 18,
+      "target": 6.0,
+      "nfev": 12168
+    },
+    {
+      "before_shot": 19,
+      "target": 5.0,
+      "nfev": 11859
+    },
+    {
+      "before_shot": 22,
+      "target": 4.0,
+      "nfev": 12162
+    },
+    {
+      "before_shot": 24,
+      "target": 3.0,
+      "nfev": 7743
+    },
+    {
+      "before_shot": 33,
+      "target": 2.0,
+      "nfev": 11121
+    },
+    {
+      "before_shot": 46,
+      "target": 0.0,
+      "nfev": 13884
+    }
+  ],
+  "best_energy": 0.0
+}

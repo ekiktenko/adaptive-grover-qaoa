@@ -1,0 +1,9 @@
+n,k,m,depth,method,instances,success_rate,instance_success_std,mean_gap,mean_fits,mean_nfev
+12,3,51,5,adaptive,1,0.6,,0.4,3.8,13799.4
+12,3,51,5,fixed_evt,1,0.4,,1.0,1.0,3621.0
+12,3,51,5,exact_greedy,1,1.0,,0.0,1.0,3615.0
+12,3,51,5,uniform,1,0.0,,1.8,0.0,0.0
+12,4,117,5,adaptive,1,1.0,,0.0,3.6,12867.6
+12,4,117,5,fixed_evt,1,0.6,,0.6,1.0,3621.0
+12,4,117,5,exact_greedy,1,1.0,,0.0,1.0,3543.0
+12,4,117,5,uniform,1,0.0,,1.2,0.0,0.0
