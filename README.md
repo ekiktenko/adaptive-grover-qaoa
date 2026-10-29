@@ -1,5 +1,7 @@
 # Grover-mixer QAOA for HUBO
 
+**Штраф за среднюю энергию:** `fit_angles(..., energy_penalty=1.0)`, в ноутбуке `ENERGY_PENALTY`, в JSON опциональное поле `energy_penalty`. Значение 0 сохраняет исходный метод; см. [описание регуляризации](docs/experiments-ru.md#регуляризация-средней-энергии-при-подборе-углов).
+
 **Пошаговый ноутбук:** [`notebooks/gm_qaoa_walkthrough.ipynb`](notebooks/gm_qaoa_walkthrough.ipynb) — генерация Max-k-SAT, точный минимум и EVT, углы, распределение вероятностей. Установка: `python -m pip install -e ".[notebook]"`; запуск: `python -m jupyter lab notebooks/gm_qaoa_walkthrough.ipynb`.
 
 **Свои эксперименты:** [пошаговая инструкция на русском](docs/experiments-ru.md).

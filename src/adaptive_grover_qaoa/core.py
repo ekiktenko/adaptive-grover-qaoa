@@ -43,9 +43,31 @@ class GaussianModel:
         mean = np.dot(self.coefficients, np.exp(-0.5 * (self.sigma * shifted)**2))
         return np.r_[self.coefficients, np.expm1(-2j * beta) * mean], np.r_[shifted, 0.]
 
-    def target_score(self, energy, beta, gamma):
+    def centered_mean_energy(self, coefficients=None, frequencies=None):
+        """Integral E |a(E)|² f(E) dE for E ~ N(0,sigma²).
+
+        E[E exp(-i t E)] = -i sigma² t exp(-sigma² t²/2).
+        The model state is normalized under f; a(E)=sqrt(2**n)*psi(E).
+        """
+        c = self.coefficients if coefficients is None else coefficients
+        t = self.frequencies if frequencies is None else frequencies
+        delta = t[:, None] - t[None, :]
+        moment = -1j * self.sigma**2 * delta * np.exp(-0.5*(self.sigma*delta)**2)
+        return float(np.sum(c[:, None]*c.conj()[None, :]*moment).real)
+
+    def target_score(self, energy, beta, gamma, energy_penalty=0.):
+        """Maximize target amplification minus penalty * <E_centered>/sigma.
+
+        Amplification is NOT ground-state probability. Penalty is dimensionless;
+        zero reproduces the original objective, including its numerical path.
+        """
+        if not np.isfinite(energy_penalty) or energy_penalty < 0:
+            raise ValueError("energy_penalty must be finite and nonnegative")
         c, t = self.candidate(beta, gamma)
-        return float(abs(np.dot(c, np.exp(-1j * t * energy)))**2)
+        score = float(abs(np.dot(c, np.exp(-1j * t * energy)))**2)
+        if energy_penalty:
+            score -= energy_penalty * self.centered_mean_energy(c,t) / self.sigma
+        return score
 
     def append(self, beta, gamma):
         self.coefficients, self.frequencies = self.candidate(beta, gamma)

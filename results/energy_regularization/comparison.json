@@ -1,0 +1,37 @@
+{
+  "problem": "Max-3-SAT",
+  "n": 10,
+  "k": 3,
+  "m": 42,
+  "problem_seed": 3,
+  "optimizer_seed": 3,
+  "depth": 20,
+  "maxiter": 100,
+  "objective": "target_amplification - energy_penalty * model_centered_mean / sigma",
+  "results": [
+    {
+      "penalty": 0,
+      "model_mean": 2.0358993321528427,
+      "true_mean": 5.231063209195872,
+      "success": 0.02370746651839173
+    },
+    {
+      "penalty": 1,
+      "model_mean": 1.737805979973757,
+      "true_mean": 5.072619020750625,
+      "success": 0.02297959788178516
+    },
+    {
+      "penalty": 10,
+      "model_mean": 1.5854710387304598,
+      "true_mean": 4.241393868892674,
+      "success": 0.011421801011094593
+    },
+    {
+      "penalty": 100,
+      "model_mean": 1.875078380754489,
+      "true_mean": 1.9718003742600363,
+      "success": 0.012813448277178867
+    }
+  ]
+}

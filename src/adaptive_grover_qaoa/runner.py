@@ -33,9 +33,9 @@ def positive_int(value, name, minimum=1):
 
 
 def validate_config(config):
-    if not isinstance(config, dict) or set(config) != KEYS:
+    if not isinstance(config, dict) or not KEYS <= set(config) or set(config) - KEYS - {"energy_penalty"}:
         missing = KEYS - set(config) if isinstance(config, dict) else KEYS
-        extra = set(config) - KEYS if isinstance(config, dict) else set()
+        extra = set(config) - KEYS - {"energy_penalty"} if isinstance(config, dict) else set()
         raise ValueError(f'Configuration keys: missing={sorted(missing)}, unknown={sorted(extra)}')
     for key, minimum in [('qubits', 2), ('clause_sizes', 2), ('depths', 0), ('instance_seeds', 0)]:
         values = config[key]
@@ -70,6 +70,9 @@ def validate_config(config):
             raise ValueError('Densities must be positive finite numbers')
         if not 1 <= round(n * alpha) <= comb(n, k) * 2**k:
             raise ValueError(f'Invalid clause count for n={n}, k={k}, alpha={alpha}')
+    penalty = config.get("energy_penalty", 0.)
+    if isinstance(penalty, bool) or not isinstance(penalty, (int,float)) or not isfinite(penalty) or penalty < 0:
+        raise ValueError("energy_penalty must be finite and nonnegative")
     return config
 
 
@@ -130,7 +133,7 @@ def run_case(case, config):
     def prepare(physical_target):
         key = float(physical_target)
         if key not in cache:
-            fitted = (fit_angles(mean,sigma,key,depth,seed,config['optimizer_maxiter']) if sigma > 0
+            fitted = (fit_angles(mean,sigma,key,depth,seed,config['optimizer_maxiter'],energy_penalty=config.get('energy_penalty',0.)) if sigma > 0
                       else dict(target=key,angles=[(0.,0.)]*depth,nfev=0))
             cache[key] = dict(**fitted,probabilities=circuit_probabilities(energies,mean,fitted['angles']))
         return cache[key]

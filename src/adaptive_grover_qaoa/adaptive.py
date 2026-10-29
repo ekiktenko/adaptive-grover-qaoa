@@ -3,19 +3,28 @@ import numpy as np
 from .core import GaussianModel, exact_layer, optimize_pair
 
 
-def fit_angles(mean, sigma, target, depth=20, seed=42, maxiter=100):
-    """Refit all layers from scratch; no enumerated spectrum or minimum input."""
+def fit_angles(mean, sigma, target, depth=20, seed=42, maxiter=100, energy_penalty=0.):
+    """Refit all layers with Gaussian target amplification minus an energy penalty.
+
+    energy_penalty multiplies model <E-mean>/sigma; zero is the original goal.
+    No enumerated spectrum or true minimum is used. model_mean_energy is the
+    final Gaussian expectation in physical units, not an exact SAT expectation.
+    """
     if sigma <= 0 or depth < 0:
         raise ValueError('Require positive sigma and nonnegative depth')
+    if not np.isfinite(energy_penalty) or energy_penalty < 0:
+        raise ValueError("energy_penalty must be finite and nonnegative")
     model = GaussianModel(sigma)
     angles, calls = [], 0
     for layer in range(1,depth+1):
-        beta,gamma,nfev = optimize_pair(lambda b,g:model.target_score(target-mean,b,g),
+        beta,gamma,nfev = optimize_pair(lambda b,g:model.target_score(target-mean,b,g,energy_penalty=energy_penalty),
                                        sigma,seed+layer,maxiter=maxiter)
         model.append(beta,gamma)
         angles.append((beta,gamma))
         calls += nfev
-    return dict(target=float(target), angles=angles, nfev=calls)
+    return dict(target=float(target), angles=angles, nfev=calls,
+                energy_penalty=float(energy_penalty),
+                model_mean_energy=float(mean + model.centered_mean_energy()))
 
 
 def circuit_probabilities(energies, mean, angles):

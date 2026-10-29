@@ -25,6 +25,11 @@ class RunnerTests(unittest.TestCase):
             bad=copy.deepcopy(c)
             bad[key]=value
             with self.assertRaises(ValueError):validate_config(bad)
+        regularized=copy.deepcopy(c)
+        regularized['energy_penalty']=2.0
+        validate_config(regularized)
+        regularized['energy_penalty']=-1
+        with self.assertRaises(ValueError):validate_config(regularized)
         bad=copy.deepcopy(c)
         bad['typo']=1
         with self.assertRaises(ValueError):validate_config(bad)
