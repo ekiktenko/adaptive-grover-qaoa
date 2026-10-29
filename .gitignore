@@ -3,3 +3,4 @@ __pycache__/
 .venv/
 .mplconfig/
 runs/
+.ipynb_checkpoints/

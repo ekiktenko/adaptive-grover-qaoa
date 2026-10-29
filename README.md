@@ -1,5 +1,7 @@
 # Grover-mixer QAOA for HUBO
 
+**Пошаговый ноутбук:** [`notebooks/gm_qaoa_walkthrough.ipynb`](notebooks/gm_qaoa_walkthrough.ipynb) — генерация Max-k-SAT, точный минимум и EVT, углы, распределение вероятностей. Установка: `python -m pip install -e ".[notebook]"`; запуск: `python -m jupyter lab notebooks/gm_qaoa_walkthrough.ipynb`.
+
 **Свои эксперименты:** [пошаговая инструкция на русском](docs/experiments-ru.md).
 Параметры: [`configs/quick.json`](configs/quick.json) и [`configs/sweep.json`](configs/sweep.json).
 Запуск: `python -m adaptive_grover_qaoa.runner configs/quick.json`.
